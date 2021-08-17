@@ -1,0 +1,16 @@
+{
+  "name": "appclimaconsola",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "color": "^4.0.1",
+    "inquirer": "^8.1.2"
+  }
+}
