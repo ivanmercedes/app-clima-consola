@@ -69,21 +69,25 @@ Antes de comenzar: checkered_flag :, debe tener [Git](https://git-scm.com) y [No
 ## :checkered_flag: Empezar ##
 
 ```bash
-# Clone this project
+# Clonar el proyecto
 $ git clone https://github.com/ivanmercedes/app-clima-consola
 
-# Access
+# Entrar en el directorio
 $ cd app-clima-consola
 
-# Install dependencies
+# Instalar las dependecias 
 $ npm i
 
-# Run the project
+# Configurar los API key en el .env ( Ver archivo de ejemplo )
+$ MAPBOX_KEY
+$ OPENWEATHER_KEY
+
+# Iniciar el proyecto
 $ npm start
 
 ```
 
-## :memo: License ##
+## :memo: Licencia ##
 
 This project is under license from MIT. For more details, see the [LICENSE](LICENSE.md) file.
 
@@ -92,4 +96,4 @@ Made with :heart: by <a href="https://github.com/ivanmercedes" target="_blank">I
 
 &#xa0;
 
-<a href="#top">Back to top</a>
+<a href="#top">Volver arriba</a>
