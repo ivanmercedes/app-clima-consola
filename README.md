@@ -64,7 +64,7 @@ En este proyecto se utilizaron las siguientes herramientas:
 
 ## :white_check_mark: Requisitos ##
 
-Antes de comenzar: checkered_flag :, debe tener [Git](https://git-scm.com) y [Node](https://nodejs.org/en/) instalados.
+Antes de comenzar :checkered_flag: , debe tener [Git](https://git-scm.com) y [Node](https://nodejs.org/en/) instalados.
 
 ## :checkered_flag: Empezar ##
 
