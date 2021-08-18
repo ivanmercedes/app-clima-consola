@@ -27,9 +27,14 @@ class Busquedas {
       // const rep = await axios.get('https://reqres.in/api/users');
       const resp = await intance.get();
       
-      console.log(resp.data);
+      return resp.data.features.map( lugar => ({
+          id: lugar.id,
+          nombre: lugar.place_name,
+          lng: lugar.center[0],
+          lat: lugar.center[1]
+      }));
 
-      return []; // retornar las ciudades
+    
     } catch (error) {
       return [];
     }
