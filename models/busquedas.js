@@ -109,9 +109,11 @@ class Busquedas {
   leerDB() {
     // verificar si existe
     if (!fs.existsSync(this.pdbPath)) return;
+    // if (fs.read(this.pdbPath).length === 0) return;
 
     // leer
     const info = fs.readFileSync(this.pdbPath, { encoding: "utf-8" });
+    if(info.length === 0) return;
     const data = JSON.parse(info);
 
     this.historial = data.historial;
