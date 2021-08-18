@@ -1,10 +1,22 @@
+const fs = require("fs");
 const axios = require("axios");
 
 class Busquedas {
-  historial = ["Haiti", "Madrid", "Punta Cana"];
+  historial = [];
+  pdbPath = "./db/database.json";
 
   constructor() {
     // Todo:  leer db si existe
+    this.leerDB();
+  }
+
+  get historialCapitalizado(){
+    return this.historial.map(lugar =>{
+        let palabras = lugar.split(' ');
+        palabras = palabras.map( p => p[0].toUpperCase() + p.substring(1));
+
+        return palabras.join(' ');
+    })
   }
 
   get paramsMapbox() {
@@ -24,11 +36,6 @@ class Busquedas {
       lang: "es",
     };
   }
-
-  //   set paramsOpenWeather(lat, lon){
-  //         this.lat = lat;
-  //         this.lon = lon;
-  //   }
 
   async ciudad(ciudad = "") {
     // peticion http
@@ -55,14 +62,14 @@ class Busquedas {
   }
 
   async climaLugar(lat, lon) {
+    this.lat = lat;
+    this.lon = lon;
     try {
-      this.lat = lat;
-      this.lon = lon;
-
       // intance axios.create
       const intance = axios.create({
         baseURL: `https://api.openweathermap.org/data/2.5/weather`,
         params: this.paramsOpenWeather,
+        // params: {...this.paramsOpenWeather, lat, lon},
       });
       // resp.data
       const resp = await intance.get();
@@ -78,6 +85,36 @@ class Busquedas {
     } catch (error) {
       console.log(error);
     }
+  }
+
+  agregarHistorial(lugar = "") {
+    //TODO: prevenir duplicado
+    if (this.historial.includes(lugar.toLocaleLowerCase())) {
+      return;
+    }
+
+    this.historial.unshift(lugar.toLocaleLowerCase());
+
+    // Grabar en DB
+    this.guardarDB();
+  }
+
+  guardarDB() {
+    const payload = {
+      historial: this.historial,
+    };
+    fs.writeFileSync(this.pdbPath, JSON.stringify(payload));
+  }
+
+  leerDB() {
+    // verificar si existe
+    if (!fs.existsSync(this.pdbPath)) return;
+
+    // leer
+    const info = fs.readFileSync(this.pdbPath, { encoding: "utf-8" });
+    const data = JSON.parse(info);
+
+    this.historial = data.historial;
   }
 }
 

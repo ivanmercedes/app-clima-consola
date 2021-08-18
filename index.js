@@ -24,16 +24,21 @@ const main = async () => {
 
         //Seleccionar la ciudad
         const idSeleccionado = await listarLugares(lugares);
+        if( idSeleccionado === '0') continue;
+
         const lugarSeleccionad = lugares.find((l) => l.id === idSeleccionado);
+        // guardar en db
+        busquedas.agregarHistorial(lugarSeleccionad.nombre);
+
         const { nombre, lng, lat } = lugarSeleccionad;
 
         // Clima
         const clima = await busquedas.climaLugar(lat, lng);
-        const {desc, min, max, temp} = clima;
+        const { desc, min, max, temp } = clima;
 
         // Mostrar resultados
+        console.clear();
         console.log("\n Informacion de la ciudad \n".green);
-
         console.log("📍 Ciudad:", nombre);
         console.log("🧭 Lat:", lat);
         console.log("🧭 Lng:", lng);
@@ -41,7 +46,14 @@ const main = async () => {
         console.log("🌡️⬇ Minima:", min);
         console.log("🌡️⬆ Maxima:", max);
         console.log("⛅ Estado del clima:", desc);
-        
+
+        break;
+
+      case 2:
+          busquedas.historialCapitalizado.forEach((lugar, i) => {
+            const idx = `${i+1}`.green;
+            console.log(`${idx} ${lugar}`);
+          })
         break;
     }
 
